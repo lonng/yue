@@ -1,0 +1,134 @@
+{
+	"variables": [],
+	"info": {
+		"name": "yue",
+		"_postman_id": "7bd1d21f-b1d9-e484-ad99-2da988d46056",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "add clue",
+			"request": {
+				"url": "127.0.0.1:8080/clues",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\":\"test title\",\n\t\"desc\":\"test desc\",\n\t\"count\":10,\n\t\"number\":\"18888888888\",\n\t\"attachment\":[\"test1.png\", \"test2.png\"]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "clue list",
+			"request": {
+				"url": "127.0.0.1:8080/clues",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\":\"test title\",\n\t\"desc\":\"test desc\",\n\t\"count\":10,\n\t\"number\":\"18888888888\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "part of clue  list",
+			"request": {
+				"url": "127.0.0.1:8080/clues?start=2&count=2",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\":\"test title\",\n\t\"desc\":\"test desc\",\n\t\"count\":10,\n\t\"number\":\"18888888888\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "clue info",
+			"request": {
+				"url": "127.0.0.1:8080/clues/7",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\":\"test title\",\n\t\"desc\":\"test desc\",\n\t\"count\":10,\n\t\"number\":\"18888888888\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "update clue info",
+			"request": {
+				"url": "127.0.0.1:8080/clues/2",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\":\"modified title\",\n\t\"desc\":\"test desc\",\n\t\"count\":10,\n\t\"number\":\"18888888888\",\n\t\"attachment\":[\"test1.png\", \"test2.png\"]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "delete clue",
+			"request": {
+				"url": "127.0.0.1:8080/clues/5",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "123456",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\":\"test title\",\n\t\"desc\":\"test desc\",\n\t\"count\":10,\n\t\"number\":\"18888888888\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "upload attachment",
+			"request": {
+				"url": "127.0.0.1:8080/blob",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "uploadfile",
+							"value": "packer%20api.postman_collection.json",
+							"type": "file",
+							"enabled": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
