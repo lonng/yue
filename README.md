@@ -40,6 +40,15 @@ r.Handle("/clues/{id}", nex.Handler(deleteClue)).Methods("DELETE")   //删除
 r.Handle("/blob", nex.Handler(uploadFile)).Methods("POST")           //上传
 ```
 
+### 使用中间件
+```
+// logMiddleware: 为每个请求打印日志
+// startTimeMiddleware: 记录请求开始时间
+// endTimeMiddleware: 记录请求结束时间, 用于统计系统性能, 或将数据放入Promethus
+nex.Before(logMiddleware, startTimeMiddleware)
+nex.After(endTimeMiddleware)
+```
+
 ### 对请求与响应的自动序列化和反序列化
 ```
 func createClue(c *ClueInfo) (*StringMessage, error) {

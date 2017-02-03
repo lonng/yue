@@ -11,6 +11,8 @@ import (
 	"strings"
 	"time"
 
+	"context"
+	"fmt"
 	"github.com/chrislonng/nex"
 	"github.com/gorilla/mux"
 )
@@ -22,6 +24,22 @@ var token = "123456"
 // save clues
 var db = struct{ clues []ClueInfo }{}
 
+func logMiddleware(ctx context.Context, r *http.Request) (context.Context, error) {
+	fmt.Printf("Method=%s, RemoteAddr=%s, URL=%s\n", r.Method, r.RemoteAddr, r.URL.String())
+	return ctx, nil
+}
+
+func startTimeMiddleware(ctx context.Context, _ *http.Request) (context.Context, error) {
+	return context.WithValue(ctx, "startTime", time.Now().UnixNano()), nil
+}
+func endTimeMiddleware(ctx context.Context, _ http.ResponseWriter) (context.Context, error) {
+	start := ctx.Value("startTime").(int64)
+	end := time.Now().UnixNano()
+	duration := end - start
+	fmt.Printf("request duration:  start=%d, end=%d, duration=%d\n", start, end, duration)
+	return ctx, nil
+}
+
 func main() {
 	nex.SetErrorEncoder(func(err error) interface{} {
 		return &ErrorMessage{
@@ -29,6 +47,10 @@ func main() {
 			Error: err.Error(),
 		}
 	})
+
+	// global middleware
+	nex.Before(logMiddleware, startTimeMiddleware)
+	nex.After(endTimeMiddleware)
 
 	r := mux.NewRouter()
 
@@ -111,7 +133,7 @@ func clueInfo(r *http.Request) (*ClueInfoResponse, error) {
 		return nil, err
 	}
 
-	return &ClueInfoResponse{Data:&db.clues[id-1]}, nil
+	return &ClueInfoResponse{Data: &db.clues[id-1]}, nil
 }
 
 func updateClue(r *http.Request, c *ClueInfo) (*StringMessage, error) {
