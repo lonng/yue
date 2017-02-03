@@ -21,8 +21,8 @@ type ClueInfo struct {
 }
 
 type ClueListResponse struct {
-	Code int `json:"code"`
-	Data []ClueInfo
+	Code int        `json:"code"`
+	Data []ClueInfo `json:"data"`
 }
 
 type ClueInfoResponse struct {
