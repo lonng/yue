@@ -1,7 +1,9 @@
 package main
 
 import (
+	"context"
 	"errors"
+	"fmt"
 	"io"
 	"mime/multipart"
 	"net/http"
@@ -11,8 +13,6 @@ import (
 	"strings"
 	"time"
 
-	"context"
-	"fmt"
 	"github.com/chrislonng/nex"
 	"github.com/gorilla/mux"
 )
@@ -56,6 +56,7 @@ func main() {
 
 	r.Handle("/clues", nex.Handler(createClue)).Methods("POST")
 	r.Handle("/clues", nex.Handler(clueList)).Methods("GET")
+	r.Handle("/clues2", nex.Handler(clueList2)).Methods("GET")
 
 	r.Handle("/clues/{id}", nex.Handler(clueInfo)).Methods("GET")
 	r.Handle("/clues/{id}", nex.Handler(updateClue)).Methods("PUT")
@@ -106,6 +107,14 @@ func clueList(query nex.Form) (*ClueListResponse, error) {
 	}
 
 	return &ClueListResponse{Data: db.clues[start : start+count]}, nil
+}
+
+// 与clueList函数功能相同, 使用query辅助函数
+func clueList2(query nex.Form) (*ClueListResponse, error) {
+	start := query.IntOrDefault("start", 0)
+	count := query.IntOrDefault("count", len(db.clues))
+
+	return &ClueListResponse{Data: db.clues[start: start+count]}, nil
 }
 
 // util function

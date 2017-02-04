@@ -99,6 +99,17 @@ func clueList(query nex.Form) (*ClueListResponse, error) {
 }
 ```
 
+### 使用查询参数辅助函数
+```
+// 与clueList函数功能相同, 使用query辅助函数
+func clueList2(query nex.Form) (*ClueListResponse, error) {
+	start := query.IntOrDefault("start", 0)
+	count := query.IntOrDefault("count", len(db.clues))
+
+	return &ClueListResponse{Data: db.clues[start: start+count]}, nil
+}
+```
+
 在参数列表中使用`nex.Form`或者`*nex.Form`, 可以自动获取查询参数, 具体用法和原生`http.Request`中的`Form`
 一样, 同时也可以使用`nex.PostForm`或者`*nex.PostForm`, 获取`Post`参数, 是对`http.Request`中的`PostForm`
 的封装
