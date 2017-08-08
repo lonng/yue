@@ -13,7 +13,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/chrislonng/nex"
+	"github.com/lonnng/nex"
 	"github.com/gorilla/mux"
 )
 
