@@ -5,7 +5,7 @@
 越来越多的WEB应用采用前后端完全分离, WEB前端使用Angular/Vue之类的库, 用JSON通过RESTful与服务器通讯,
 同样的服务器接口不但可以用于WEB前端, 同时能用于动应用前端.
 
-这个例子通过一个失物招领的信息管理系统来介绍如何使用[nex](https://github.com/chrislonng/nex)包快速
+这个例子通过一个失物招领的信息管理系统来介绍如何使用[nex](https://github.com/lonnng/nex)包快速
 构建JSON API服务, 限于作者水平有限, 如果发现错误, 欢迎指正.
 
 ## REPO名字的由来
@@ -15,12 +15,12 @@
 简单的例子, 能让读者明白`nex`如何使用, 为了保存示例简单, 减少依赖, 数据没使用数据库, 直接使用一个数组来
 存储所有的`Clue`信息.
 
-完整代码: https://github.com/chrislonng/yue
+完整代码: https://github.com/lonnng/yue
 
 需要下载依赖
 ```
 go get github.com/gorilla/mux
-go get github.com/chrislonng/nex
+go get github.com/lonnng/nex
 ```
 
 这个代码不包括WEB前端, 只有后端的JSON API服务, 读者可以使用PostMan测试, Repo中包含PostMan的配置
@@ -149,7 +149,7 @@ func updateClue(r *http.Request, c *ClueInfo) (*StringMessage, error) {
 	return SuccessResponse, nil
 }
 ```
-所有`nex`支持的类型, 都可以在函数签名中使用, 没有顺序要求, `nex`支持的类型, 详见[nex](https://github.com/chrislonng/nex)
+所有`nex`支持的类型, 都可以在函数签名中使用, 没有顺序要求, `nex`支持的类型, 详见[nex](https://github.com/lonnng/nex)
 
 ### 在参数中使用`http.Header`
 ```
@@ -249,7 +249,7 @@ nex.SetErrorEncoder(func(err error) interface{} {
 
 ---
 
-欢迎任何关于`nex`的建议及意见, e-mail: chris@lonng.org, 欢迎Star, [nex传送门](https://github.com/chrislonng/nex)
+欢迎任何关于`nex`的建议及意见, e-mail: chris@lonng.org, 欢迎Star, [nex传送门](https://github.com/lonnng/nex)
 
 ## License
 Copyright (c) <2016> <chris@lonng.org>
